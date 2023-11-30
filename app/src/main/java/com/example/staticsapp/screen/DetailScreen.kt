@@ -30,7 +30,7 @@ import com.example.staticsapp.R
 import com.example.staticsapp.model.Slice
 import com.example.staticsapp.remote.DataRepository
 import com.example.staticsapp.ui.theme.StaticsAppTheme
-import zuper.dev.android.dashboard.data.remote.ApiDataSource
+import com.example.staticsapp.remote.ApiDataSource
 
 
 @Composable

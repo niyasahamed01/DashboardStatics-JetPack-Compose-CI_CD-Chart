@@ -1,4 +1,4 @@
-package zuper.dev.android.dashboard.data.remote
+package com.example.staticsapp.remote
 
 import com.example.staticsapp.model.InvoiceApiModel
 import com.example.staticsapp.model.InvoiceStatus

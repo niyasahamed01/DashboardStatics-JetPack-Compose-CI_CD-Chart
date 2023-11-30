@@ -6,7 +6,6 @@ import com.example.staticsapp.model.InvoiceApiModel
 import com.example.staticsapp.model.InvoiceStatus
 import com.example.staticsapp.model.JobApiModel
 import com.example.staticsapp.model.JobStatus
-import zuper.dev.android.dashboard.data.remote.ApiDataSource
 
 class DataRepository(private val apiDataSource: ApiDataSource) {
 
