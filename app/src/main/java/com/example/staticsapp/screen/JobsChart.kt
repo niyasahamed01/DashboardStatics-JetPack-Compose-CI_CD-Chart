@@ -12,10 +12,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -59,120 +65,128 @@ fun JobsChart(navController: NavHostController) {
         state = 1f
     })
 
-    Card(
+    Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-            .border(0.8.dp, Color.Black)
-            .clickable {
-                navController.navigate("jobDetail")
-            }// Border around the card
+            .fillMaxSize()
+            .background(Color.White),
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.Top
     ) {
-        Box(
-            modifier = Modifier
-                .background(Color.White)
-                .fillMaxWidth()
-        ) {
-            Text(
-                fontSize = 20.sp,
-                text = "Job Stats",
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier
-                    .padding(8.dp)
-            )
-
-        }
-        Divider(
-            modifier = Modifier
-                .height(1.dp) // Set the desired height for the divider
-                .fillMaxWidth()
-                .background(Color.Black) // Set your desired color for the divider
-        )
-        Box(
-            modifier = Modifier
-                .background(Color.White)
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(5.dp)
-
-            ) {
-                Row(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(3.dp), horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-
-
-                    Text(
-                        fontSize = 15.sp,
-                        text = "60 Jobs",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = Color.DarkGray,
-                        modifier = Modifier.padding(3.dp)
-                    )
-
-                    Text(
-                        fontSize = 15.sp,
-                        text = "25 of 60 completed",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = Color.DarkGray,
-                        modifier = Modifier.padding(3.dp)
-                    )
-                }
-
-                Row(
+                Card(
                     modifier = Modifier
-                        .padding(10.dp)
                         .fillMaxWidth()
-                        .height(25.dp)
-
+                        .padding(8.dp)
+                        .border(0.8.dp, Color.Black)
+                        .clickable {
+                            navController.navigate("detailScreen/type1")
+                        }// Border around the card
                 ) {
+                    Box(
+                        modifier = Modifier
+                            .background(Color.White)
+                            .fillMaxWidth()
+                    ) {
+                        Text(
+                            fontSize = 20.sp,
+                            text = "Job Stats",
+                            style = MaterialTheme.typography.bodyMedium,
+                            modifier = Modifier
+                                .padding(8.dp)
+                        )
 
-                    slices.forEachIndexed { index, slice ->
-                        val cornerRadius = when (index) {
-                            0 -> RoundedCornerShape(
-                                topStart = 8.dp,
-                                topEnd = 0.dp,
-                                bottomStart = 8.dp,
-                                bottomEnd = 0.dp
-                            )
-
-                            slices.size - 1 -> RoundedCornerShape(
-                                topStart = 0.dp,
-                                topEnd = 8.dp,
-                                bottomStart = 0.dp,
-                                bottomEnd = 8.dp
-                            )
-
-                            else -> RoundedCornerShape(0.dp)
-                        }
-
+                    }
+                    Divider(
+                        modifier = Modifier
+                            .height(1.dp) // Set the desired height for the divider
+                            .fillMaxWidth()
+                            .background(Color.Black) // Set your desired color for the divider
+                    )
+                    Box(
+                        modifier = Modifier
+                            .background(Color.White)
+                    ) {
                         Column(
                             modifier = Modifier
-                                .fillMaxHeight()
-                                .weight(slice.value)
-                                .clip(cornerRadius),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
+                                .fillMaxWidth()
+                                .padding(5.dp)
 
-                            Box(
+                        ) {
+                            Row(
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(3.dp), horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+
+
+                                Text(
+                                    fontSize = 15.sp,
+                                    text = "60 Jobs",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = Color.DarkGray,
+                                    modifier = Modifier.padding(3.dp)
+                                )
+
+                                Text(
+                                    fontSize = 15.sp,
+                                    text = "25 of 60 completed",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = Color.DarkGray,
+                                    modifier = Modifier.padding(3.dp)
+                                )
+                            }
+
+                            Row(
                                 modifier = Modifier
-                                    .fillMaxSize()
-                                    .background(slice.color),
-                            )
+                                    .padding(10.dp)
+                                    .fillMaxWidth()
+                                    .height(25.dp)
+
+                            ) {
+
+                                slices.forEachIndexed { index, slice ->
+                                    val cornerRadius = when (index) {
+                                        0 -> RoundedCornerShape(
+                                            topStart = 8.dp,
+                                            topEnd = 0.dp,
+                                            bottomStart = 8.dp,
+                                            bottomEnd = 0.dp
+                                        )
+
+                                        slices.size - 1 -> RoundedCornerShape(
+                                            topStart = 0.dp,
+                                            topEnd = 8.dp,
+                                            bottomStart = 0.dp,
+                                            bottomEnd = 8.dp
+                                        )
+
+                                        else -> RoundedCornerShape(0.dp)
+                                    }
+
+                                    Column(
+                                        modifier = Modifier
+                                            .fillMaxHeight()
+                                            .weight(slice.value)
+                                            .clip(cornerRadius),
+                                        horizontalAlignment = Alignment.CenterHorizontally
+                                    ) {
+
+                                        Box(
+                                            modifier = Modifier
+                                                .fillMaxSize()
+                                                .background(slice.color),
+                                        )
+
+                                    }
+
+                                }
+                            }
 
                         }
 
                     }
+
+                    CustomChart(slices = slices)
+
                 }
-
             }
-
-        }
-
-      CustomChart(slices = slices)
-    }
-
 }

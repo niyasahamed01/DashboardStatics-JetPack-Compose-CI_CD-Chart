@@ -62,7 +62,7 @@ fun InvoiceChart(navController: NavHostController) {
             .padding(8.dp)
             .border(0.8.dp, Color.Black)
             .clickable {
-                navController.navigate("invoiceDetail")
+                navController.navigate("detailScreen/type2")
             } // Border around the card
     ) {
         Box(

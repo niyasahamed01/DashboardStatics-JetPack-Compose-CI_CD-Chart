@@ -40,27 +40,6 @@ import com.example.staticsapp.ui.theme.StaticsAppTheme
 
 class MainActivity : ComponentActivity() {
 
-    val pinkColor = Color(0xFFFF69B4)
-    val skyBlueColor = Color(0xFF87CEEB)
-    val oceanBlueColor = Color(0xFF0077BE)
-    val orangeColor = Color(0xFFFFA500)
-    val greenColor = Color(0xFF719671) // Custom Green color
-
-    val slices = listOf(
-        Slice(value = 65f, color = pinkColor, text = "Yet to Start(10)"),
-        Slice(value = 40f, color = skyBlueColor, text = "In-Progress(15)"),
-        Slice(value = 30f, color = oceanBlueColor, text = "Cancelled(5)"),
-        Slice(value = 25f, color = orangeColor, text = "Completed(25)"),
-        Slice(value = 15f, color = greenColor, text = "In-Complete(5)"),
-    )
-
-    val invoice = listOf(
-        Slice(value = 40f, color = skyBlueColor, text = "Draft($10000)"),
-        Slice(value = 30f, color = oceanBlueColor, text = "Pending($20000)"),
-        Slice(value = 25f, color = orangeColor, text = "Paid($150000)"),
-        Slice(value = 15f, color = greenColor, text = "Bad Debit($5000)"),
-    )
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -76,11 +55,9 @@ class MainActivity : ComponentActivity() {
                         composable("jobList") {
                             Dashboard(navController)
                         }
-                        composable("jobDetail") {
-                            DetailScreen(slices, navController)
-                        }
-                        composable("invoiceDetail") {
-                            DetailScreen(invoice, navController)
+                        composable("detailScreen/{type}") { backStackEntry ->
+                            val type = backStackEntry.arguments?.getString("type") ?: ""
+                            DetailScreen(type,navController)
                         }
                     }
                 }
