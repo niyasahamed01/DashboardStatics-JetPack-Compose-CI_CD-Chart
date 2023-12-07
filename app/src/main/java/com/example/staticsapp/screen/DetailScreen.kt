@@ -102,7 +102,6 @@ fun DetailScreen(type: String, navController: NavHostController) {
                 )
             }
 
-
             Row(
                 Modifier
                     .fillMaxWidth()
