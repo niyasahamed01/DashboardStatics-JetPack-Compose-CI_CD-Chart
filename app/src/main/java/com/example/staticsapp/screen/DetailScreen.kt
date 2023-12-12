@@ -76,7 +76,7 @@ fun DetailScreen(type: String, navController: NavHostController) {
 
             Row(
                 modifier = Modifier
-                    .padding(15.dp)
+                    .padding(13.dp)
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
 
@@ -85,7 +85,7 @@ fun DetailScreen(type: String, navController: NavHostController) {
                     painter = painterResource(id = R.drawable.baseline_arrow_back_24),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(20.dp)
+                        .size(22.dp)
                         .clickable {
                             navController.navigateUp()
                         }
@@ -113,7 +113,7 @@ fun DetailScreen(type: String, navController: NavHostController) {
                     fontSize = 15.sp,
                     text = if (type == "type1") "60 Jobs" else "Total value (\$50,000)",
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.DarkGray,
+                    color = Color.Black,
                     modifier = Modifier.padding(5.dp)
                 )
 
@@ -121,7 +121,7 @@ fun DetailScreen(type: String, navController: NavHostController) {
                     fontSize = 15.sp,
                     text = if (type == "type1") "25 of 60 completed" else "$15,000 collected",
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.DarkGray,
+                    color = Color.Black,
                     modifier = Modifier.padding(5.dp)
                 )
             }
@@ -130,7 +130,7 @@ fun DetailScreen(type: String, navController: NavHostController) {
                 modifier = Modifier
                     .padding(10.dp)
                     .fillMaxWidth()
-                    .height(30.dp)
+                    .height(20.dp)
 
             ) {
 

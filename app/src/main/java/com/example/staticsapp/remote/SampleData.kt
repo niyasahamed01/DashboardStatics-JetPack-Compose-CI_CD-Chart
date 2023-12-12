@@ -4,8 +4,11 @@ import com.example.staticsapp.model.InvoiceApiModel
 import com.example.staticsapp.model.InvoiceStatus
 import com.example.staticsapp.model.JobApiModel
 import com.example.staticsapp.model.JobStatus
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.Locale
+import java.util.TimeZone
 import kotlin.random.Random
 
 object SampleData {
@@ -49,6 +52,21 @@ object SampleData {
             )
         }
     }
+
+    fun convertGmtToLocal(startTime: String): String {
+
+        return try {
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+            inputFormat.timeZone = TimeZone.getTimeZone("UTC") // Assuming the input is in UTC
+
+            val outputFormat = SimpleDateFormat("dd/MMM/yyyy hh:mm a", Locale.getDefault())
+            outputFormat.timeZone = TimeZone.getDefault() // Use the device's default time zone
+            val date = inputFormat.parse(startTime)
+            outputFormat.format(date!!)
+        } catch (e: Exception) {
+            startTime
+        }
+    }
 }
 
 private fun generateRandomJobTitle(): String {
@@ -70,3 +88,6 @@ fun generateRandomCustomerName(): String {
 
     return "$randomFirstName $randomLastName"
 }
+
+
+

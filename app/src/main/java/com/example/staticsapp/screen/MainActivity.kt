@@ -1,9 +1,12 @@
-package com.example.staticsapp
+package com.example.staticsapp.screen
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -16,9 +19,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.staticsapp.screen.Dashboard
-import com.example.staticsapp.screen.DetailScreen
-import com.example.staticsapp.screen.PageContent
 import com.example.staticsapp.ui.theme.StaticsAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -43,20 +43,14 @@ fun AppContent() {
 
     } else {
 
-        Surface(
-            modifier = Modifier
-                .fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            val navController = rememberNavController()
-            NavHost(navController = navController, startDestination = "dashboard") {
-                composable("dashboard") {
-                    PageContent(navController)
-                }
-                composable("detailScreen/{type}") { backStackEntry ->
-                    val type = backStackEntry.arguments?.getString("type") ?: ""
-                    DetailScreen(type, navController)
-                }
+        val navController = rememberNavController()
+        NavHost(navController = navController, startDestination = "dashboard") {
+            composable("dashboard") {
+                PageContent(navController)
+            }
+            composable("detailScreen/{type}") { backStackEntry ->
+                val type = backStackEntry.arguments?.getString("type") ?: ""
+                DetailScreen(type, navController)
             }
         }
     }

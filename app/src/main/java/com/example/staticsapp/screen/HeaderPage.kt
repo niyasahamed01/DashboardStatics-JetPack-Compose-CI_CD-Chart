@@ -62,7 +62,7 @@ fun Header(slices: List<Slice>) {
                     fontSize = 15.sp,
                     text = if (slices.size > 4) "60 Jobs" else "Total value ($50,000)",
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.DarkGray,
+                    color = Color.Black,
                     modifier = Modifier.padding(3.dp)
                 )
 
@@ -70,7 +70,7 @@ fun Header(slices: List<Slice>) {
                     fontSize = 15.sp,
                     text = if (slices.size > 4) "25 of 60 completed" else "$15,000 collected",
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.DarkGray,
+                    color = Color.Black,
                     modifier = Modifier.padding(3.dp)
                 )
             }

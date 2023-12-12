@@ -1,4 +1,4 @@
-package com.example.staticsapp
+package com.example.staticsapp.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.staticsapp.R
 import kotlinx.coroutines.delay
 
 @Composable

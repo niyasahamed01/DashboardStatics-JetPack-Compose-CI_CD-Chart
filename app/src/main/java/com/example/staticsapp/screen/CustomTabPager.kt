@@ -41,6 +41,7 @@ import com.example.staticsapp.model.JobApiModel
 import com.example.staticsapp.model.JobStatus
 import com.example.staticsapp.model.Slice
 import com.example.staticsapp.remote.DataRepository
+import com.example.staticsapp.remote.SampleData
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
@@ -164,7 +165,7 @@ fun JobList(jobList: List<JobApiModel>) {
 @Composable
 fun JobCard(job: JobApiModel? = null, invoice: InvoiceApiModel? = null) {
 
-    val localStartTime = job?.startTime?.let { convertGmtToLocal(it) }
+    val localStartTime = job?.startTime?.let { SampleData.convertGmtToLocal(it) }
 
     Card(
         modifier = Modifier
@@ -264,20 +265,4 @@ fun SwipeRefreshCompose(invoiceList: List<JobApiModel>) {
 }
 
 
-@RequiresApi(Build.VERSION_CODES.O)
-@Composable
-fun convertGmtToLocal(startTime: String): String {
-
-    return try {
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-        inputFormat.timeZone = TimeZone.getTimeZone("UTC") // Assuming the input is in UTC
-
-        val outputFormat = SimpleDateFormat("dd/MMM/yyyy hh:mm a", Locale.getDefault())
-        outputFormat.timeZone = TimeZone.getDefault() // Use the device's default time zone
-        val date = inputFormat.parse(startTime)
-        outputFormat.format(date)
-    } catch (e: Exception) {
-        startTime
-    }
-}
 
