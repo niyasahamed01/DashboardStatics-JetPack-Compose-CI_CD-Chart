@@ -1,7 +1,5 @@
 package com.example.staticsapp.screen
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -31,10 +29,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.flowOf
 import com.example.staticsapp.model.InvoiceApiModel
 import com.example.staticsapp.model.InvoiceStatus
 import com.example.staticsapp.model.JobApiModel
@@ -42,9 +36,10 @@ import com.example.staticsapp.model.JobStatus
 import com.example.staticsapp.model.Slice
 import com.example.staticsapp.remote.DataRepository
 import com.example.staticsapp.remote.SampleData
-import java.text.SimpleDateFormat
-import java.util.Locale
-import java.util.TimeZone
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flowOf
 
 
 @Composable
@@ -98,7 +93,7 @@ fun StatusTabs(dataRepository: DataRepository, slices: List<Slice>) {
                         text = {
                             Text(
                                 text = "${jobStatus.name} (${count})",
-                                fontSize = 18.sp,
+                                fontSize = 15.sp,
                                 textAlign = TextAlign.Start
                             )
                         },
@@ -123,7 +118,7 @@ fun StatusTabs(dataRepository: DataRepository, slices: List<Slice>) {
                         text = {
                             Text(
                                 text = "${invoiceStatus.name} (${count})",
-                                fontSize = 18.sp,
+                                fontSize = 15.sp,
                                 textAlign = TextAlign.Start
                             )
                         },

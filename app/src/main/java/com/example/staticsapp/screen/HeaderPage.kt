@@ -33,7 +33,7 @@ fun Header(slices: List<Slice>) {
             .fillMaxWidth()
     ) {
         Text(
-            fontSize = 20.sp,
+            fontSize = 18.sp,
             text = if (slices.size > 4) "Job Stats" else "Invoice Stats",
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier

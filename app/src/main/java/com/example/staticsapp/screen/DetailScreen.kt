@@ -28,9 +28,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.staticsapp.R
 import com.example.staticsapp.model.Slice
-import com.example.staticsapp.remote.DataRepository
-import com.example.staticsapp.ui.theme.StaticsAppTheme
 import com.example.staticsapp.remote.ApiDataSource
+import com.example.staticsapp.remote.DataRepository
 
 
 @Composable
@@ -175,7 +174,7 @@ fun DetailScreen(type: String, navController: NavHostController) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 20.dp)
+                    .padding(top = 10.dp)
             ) {
                 StatusTabs(dataRepository = DataRepository(apiDataSource = ApiDataSource()), slices)
             }
