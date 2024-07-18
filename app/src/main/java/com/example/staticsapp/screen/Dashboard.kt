@@ -1,5 +1,6 @@
 package com.example.staticsapp.screen
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -29,6 +30,7 @@ import com.example.staticsapp.R
 
 @Composable
 fun Dashboard(navController: NavHostController) {
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -102,92 +104,4 @@ fun Dashboard(navController: NavHostController) {
             InvoiceChart(navController)
         }
     }
-
 }
-
-
-@Composable
-fun PageContent(navController: NavHostController) {
-
-    val scrollState = rememberScrollState()
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(10.dp)
-            .verticalScroll(scrollState)
-    ) {
-
-        Profile()
-
-        JobsChart(navController)
-
-        InvoiceChart(navController)
-
-    }
-
-}
-
-
-@Composable
-fun Profile() {
-
-    Text(
-        fontSize = 20.sp,
-        text = "DashBoard",
-        style = MaterialTheme.typography.bodyLarge,
-        modifier = Modifier
-            .padding(bottom = 16.dp)
-    )
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-            .border(0.8.dp, Color.Black)  // Border around the card
-    ) {
-        Box(
-            modifier = Modifier
-                .background(Color.White)
-                .padding(8.dp)
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-            ) {
-                Column(
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(end = 8.dp)
-                ) {
-
-                    Text(
-                        fontSize = 18.sp,
-                        text = "Hello, Henry Jones!",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = Color.Black,
-                        modifier = Modifier.padding(bottom = 8.dp)
-                    )
-
-                    Text(
-                        fontSize = 15.sp,
-                        text = "Friday, January 6th 2022",
-                        style = MaterialTheme.typography.bodySmall,
-                        modifier = Modifier.padding(bottom = 8.dp)
-                    )
-                }
-                Image(
-                    painter = painterResource(id = R.drawable.employee),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(50.dp)
-                        .clip(MaterialTheme.shapes.medium)
-                        .align(Alignment.CenterVertically)
-                )
-            }
-        }
-    }
-}
-
-
