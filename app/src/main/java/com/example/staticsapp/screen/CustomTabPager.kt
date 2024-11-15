@@ -1,20 +1,11 @@
 package com.example.staticsapp.screen
 
-import android.os.Build
-import androidx.annotation.RequiresApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
@@ -27,23 +18,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.flowOf
 import com.example.staticsapp.model.InvoiceApiModel
 import com.example.staticsapp.model.InvoiceStatus
 import com.example.staticsapp.model.JobApiModel
 import com.example.staticsapp.model.JobStatus
 import com.example.staticsapp.model.Slice
 import com.example.staticsapp.remote.DataRepository
-import java.text.SimpleDateFormat
-import java.util.Locale
-import java.util.TimeZone
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flowOf
 
 
 @Composable
@@ -97,7 +84,7 @@ fun StatusTabs(dataRepository: DataRepository, slices: List<Slice>) {
                         text = {
                             Text(
                                 text = "${jobStatus.name} (${count})",
-                                fontSize = 18.sp,
+                                fontSize = 15.sp,
                                 textAlign = TextAlign.Start
                             )
                         },
@@ -122,7 +109,7 @@ fun StatusTabs(dataRepository: DataRepository, slices: List<Slice>) {
                         text = {
                             Text(
                                 text = "${invoiceStatus.name} (${count})",
-                                fontSize = 18.sp,
+                                fontSize = 15.sp,
                                 textAlign = TextAlign.Start
                             )
                         },
@@ -161,80 +148,7 @@ fun JobList(jobList: List<JobApiModel>) {
 
 }
 
-@Composable
-fun JobCard(job: JobApiModel? = null, invoice: InvoiceApiModel? = null) {
 
-    val localStartTime = job?.startTime?.let { convertGmtToLocal(it) }
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-            .border(0.8.dp, Color.Black)
-    ) {
-        Box(
-            modifier = Modifier
-                .background(Color.White)
-                .padding(8.dp)
-        ) {
-            Column(
-                Modifier
-                    .fillMaxWidth()
-                    .padding(10.dp), verticalArrangement = Arrangement.SpaceBetween
-            ) {
-
-                if (job != null) {
-                    Text(
-                        text = "#${job.jobNumber.toString()}",
-                        fontSize = 15.sp,
-                        modifier = Modifier.padding(3.dp),
-                        style = MaterialTheme.typography.bodySmall,
-                    )
-                    Text(
-                        text = job.title,
-                        style = MaterialTheme.typography.bodySmall,
-                        fontSize = 15.sp,
-                        modifier = Modifier.padding(3.dp),
-                        color = Color.Black
-                    )
-
-                    Text(
-                        text = localStartTime.toString(),
-                        fontSize = 15.sp,
-                        modifier = Modifier.padding(3.dp),
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                } else {
-                    Text(
-                        text = "#${invoice?.invoiceNumber.toString()}",
-                        fontSize = 15.sp,
-                        modifier = Modifier.padding(3.dp),
-                        style = MaterialTheme.typography.bodySmall,
-                    )
-                    invoice?.customerName?.let {
-                        Text(
-                            text = it,
-                            style = MaterialTheme.typography.bodySmall,
-                            fontSize = 15.sp,
-                            modifier = Modifier.padding(3.dp),
-                            color = Color.Black
-                        )
-                    }
-                    invoice?.total?.let {
-                        Text(
-                            text = "$${it.toString()}",
-                            style = MaterialTheme.typography.bodySmall,
-                            fontSize = 15.sp,
-                            modifier = Modifier.padding(3.dp),
-                            color = Color.Black
-                        )
-                    }
-                }
-
-            }
-        }
-    }
-}
 
 
 @Composable
@@ -264,20 +178,4 @@ fun SwipeRefreshCompose(invoiceList: List<JobApiModel>) {
 }
 
 
-@RequiresApi(Build.VERSION_CODES.O)
-@Composable
-fun convertGmtToLocal(startTime: String): String {
-
-    return try {
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-        inputFormat.timeZone = TimeZone.getTimeZone("UTC") // Assuming the input is in UTC
-
-        val outputFormat = SimpleDateFormat("dd/MMM/yyyy hh:mm a", Locale.getDefault())
-        outputFormat.timeZone = TimeZone.getDefault() // Use the device's default time zone
-        val date = inputFormat.parse(startTime)
-        outputFormat.format(date)
-    } catch (e: Exception) {
-        startTime
-    }
-}
 

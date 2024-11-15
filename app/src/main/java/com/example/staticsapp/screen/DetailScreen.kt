@@ -28,13 +28,41 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.staticsapp.R
 import com.example.staticsapp.model.Slice
-import com.example.staticsapp.remote.DataRepository
-import com.example.staticsapp.ui.theme.StaticsAppTheme
 import com.example.staticsapp.remote.ApiDataSource
+import com.example.staticsapp.remote.DataRepository
 
 
 @Composable
-fun DetailScreen(slices: List<Slice>, navController: NavHostController) {
+fun DetailScreen(type: String, navController: NavHostController) {
+
+    val pinkColor = Color(0xFFFF69B4)
+    val skyBlueColor = Color(0xFF87CEEB)
+    val oceanBlueColor = Color(0xFF0077BE)
+    val orangeColor = Color(0xFFFFA500)
+    val greenColor = Color(0xFF719671)
+
+    val jobList = listOf(
+        Slice(value = 65f, color = pinkColor, text = "Yet to Start(10)"),
+        Slice(value = 40f, color = skyBlueColor, text = "In-Progress(15)"),
+        Slice(value = 30f, color = oceanBlueColor, text = "Cancelled(5)"),
+        Slice(value = 25f, color = orangeColor, text = "Completed(25)"),
+        Slice(value = 15f, color = greenColor, text = "In-Complete(5)"),
+    )
+
+    val invoiceList = listOf(
+        Slice(value = 40f, color = skyBlueColor, text = "Draft($10000)"),
+        Slice(value = 30f, color = oceanBlueColor, text = "Pending($20000)"),
+        Slice(value = 25f, color = orangeColor, text = "Paid($150000)"),
+        Slice(value = 15f, color = greenColor, text = "Bad Debit($5000)"),
+    )
+
+
+    val slices = when (type) {
+        "type1" -> jobList
+        "type2" -> invoiceList
+        else -> emptyList()
+    }
+
 
     Surface(
         modifier = Modifier
@@ -47,7 +75,7 @@ fun DetailScreen(slices: List<Slice>, navController: NavHostController) {
 
             Row(
                 modifier = Modifier
-                    .padding(15.dp)
+                    .padding(13.dp)
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
 
@@ -56,7 +84,7 @@ fun DetailScreen(slices: List<Slice>, navController: NavHostController) {
                     painter = painterResource(id = R.drawable.baseline_arrow_back_24),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(20.dp)
+                        .size(22.dp)
                         .clickable {
                             navController.navigateUp()
                         }
@@ -65,14 +93,13 @@ fun DetailScreen(slices: List<Slice>, navController: NavHostController) {
                 )
                 Text(
                     fontSize = 20.sp,
-                    text = if (slices.size > 4) "Jobs(60)" else "Invoice Stats($50,000)",
+                    text = if (type == "type1") "Jobs(60)" else "Invoice Stats($50,000)",
                     color = Color.Black,
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier
                         .padding(8.dp)
                 )
             }
-
 
             Row(
                 Modifier
@@ -83,17 +110,17 @@ fun DetailScreen(slices: List<Slice>, navController: NavHostController) {
 
                 Text(
                     fontSize = 15.sp,
-                    text = if (slices.size > 4) "60 Jobs" else "Total value (\$50,000)",
+                    text = if (type == "type1") "60 Jobs" else "Total value (\$50,000)",
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.DarkGray,
+                    color = Color.Black,
                     modifier = Modifier.padding(5.dp)
                 )
 
                 Text(
                     fontSize = 15.sp,
-                    text = if (slices.size > 4) "25 of 60 completed" else "$15,000 collected",
+                    text = if (type == "type1") "25 of 60 completed" else "$15,000 collected",
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.DarkGray,
+                    color = Color.Black,
                     modifier = Modifier.padding(5.dp)
                 )
             }
@@ -102,7 +129,7 @@ fun DetailScreen(slices: List<Slice>, navController: NavHostController) {
                 modifier = Modifier
                     .padding(10.dp)
                     .fillMaxWidth()
-                    .height(30.dp)
+                    .height(20.dp)
 
             ) {
 
@@ -147,13 +174,13 @@ fun DetailScreen(slices: List<Slice>, navController: NavHostController) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 20.dp)
+                    .padding(top = 10.dp)
             ) {
                 StatusTabs(dataRepository = DataRepository(apiDataSource = ApiDataSource()), slices)
             }
         }
     }
-    }
+}
 
 
 
